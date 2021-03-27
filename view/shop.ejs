@@ -1,0 +1,33 @@
+<%- include('includes/start.ejs') %>
+<header>
+   
+    <%- include('includes/nav.ejs') %>  
+
+    <main>
+        <h1>My Products</h1>
+        <p>List of all the products...</p>
+        <% if(prods.length>0){ %>
+            
+                <div class="card-deck">
+                
+            <%for(let p of prods) {%>
+                <div class="card bg-success" style="max-width: 10rem;">
+  
+                <img class="card-img-top" src="<%= p.url %>" alt="<%= p.title %>" style="width: 8rem;">
+                
+                <div class="card-body">
+                <h5 class="card-title"><%= p.title %></h5>
+                <p class="card-text"><%= p.price %></p>
+                
+                <p class="card-text"><%= p.desc %></p>
+                <form action="/cart" method="POST">
+                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                    <input type="hidden" name="pId" value="<%=p.id %>">
+                </form>
+                </div></div>
+                 <%}%></div>
+          <% }else { %>
+            <h1>No Product Found !!</h1>
+            <% } %>
+    </main>
+<%- include('includes/end.ejs') %>
